@@ -11,6 +11,6 @@ export const signin = async (username, password) => {
   return response.data;
 };
 
-export const signout = () => {
+export const logout = () => {
   localStorage.removeItem('token');
 };

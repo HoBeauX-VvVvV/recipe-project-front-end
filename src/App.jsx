@@ -4,6 +4,7 @@ import RecipeList from './components/RecipeList';
 import SignupForm from './components/SignupForm';
 import SigninForm from './components/SigninForm';
 import RecipeShow from './components/RecipeShow';
+import NavBar from './components/NavBar';
 import './App.css'
 
 const App = () => {
@@ -12,11 +13,7 @@ const App = () => {
       <div>
         <header>
           <h1>Recipe Collection App</h1>
-          <nav>
-            <a href="/recipes">Recipes</a> | 
-            <a href="/signup">Sign Up</a> | 
-            <a href="/signin">Sign In</a>
-          </nav>
+          <NavBar />
         </header>
         
         <main>
