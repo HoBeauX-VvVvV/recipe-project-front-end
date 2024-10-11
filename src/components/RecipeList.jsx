@@ -1,54 +1,42 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import RecipeForm from './RecipeForm';
+import CommentForm from './CommentForm';
+import { Link } from 'react-router-dom';
 
-const RecipeForm = ({ fetchRecipes, recipe }) => {
-  const [title, setTitle] = useState(recipe ? recipe.title : '');
-  const [ingredients, setIngredients] = useState(recipe ? recipe.ingredients.join(', ') : '');
-  const [instructions, setInstructions] = useState(recipe ? recipe.instructions : '');
+const RecipeList = () => {
+  const [recipes, setRecipes] = useState([]);
+  const [error, setError] = useState('');
+  
+  const fetchRecipes = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/recipes');
+      setRecipes(response.data);
+    } catch (error) {
+      setError('Error fetching recipes');
+    }
+  };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const token = localStorage.getItem('token');
-    const newRecipe = {
-      title,
-      ingredients: ingredients.split(',').map(item => item.trim()),
-      instructions
-    };
-       await axios.put(`http://localhost:3000/recipes/${recipe._id}`, newRecipe, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-      fetchRecipes(); 
-      setTitle('');
-      setIngredients('');
-      setInstructions('');
-   };
+  useEffect(() => {
+    fetchRecipes();
+  }, []);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        required
-      />
-      <input
-        type="text"
-        placeholder="Ingredients (comma separated)"
-        value={ingredients}
-        onChange={(e) => setIngredients(e.target.value)}
-        required
-      />
-      <textarea
-        placeholder="Instructions"
-        value={instructions}
-        onChange={(e) => setInstructions(e.target.value)}
-        required
-      />
+    <div>
+      <h2>Recipes</h2>
       {error && <p>{error}</p>}
-      <button type="submit">{recipe ? 'Update Recipe' : 'Add Recipe'}</button>
-    </form>
+      <RecipeForm fetchRecipes={fetchRecipes} />
+      {recipes.map(recipe => (
+        <div key={recipe._id}>
+          <h3>{recipe.title}</h3>
+          <p><strong>Ingredients:</strong> {recipe.ingredients.join(', ')}</p>
+          <p><strong>Instructions:</strong> {recipe.instructions}</p>
+          <Link to={`/recipes/${recipe._id}`}>View Recipe</Link>
+          <CommentForm recipeId={recipe._id} fetchComments={fetchRecipes} />
+        </div>
+      ))}
+    </div>
   );
 };
 
-export default RecipeForm;
+export default RecipeList;
