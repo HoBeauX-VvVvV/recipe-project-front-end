@@ -16,7 +16,7 @@ const CommentForm = ({ recipeId, fetchComments }) => {
       fetchComments(); 
       setText('');
     } catch (error) {
-      setError('Error adding comment');
+      setError('Please sign in to comment');
     }
   };
 

@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import { signin } from '../services/authService';
-import { useNavigate } from 'react-router-dom';
+
 
 const SigninForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [welcomeMessage, setWelcomeMessage] = useState(''); 
-  const navigate = useNavigate();
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await signin(username, password);
       setWelcomeMessage(`Welcome, ${username}!`);
+      setError('');
     } catch (error) {
       setError('Invalid username or password');
       setWelcomeMessage('');

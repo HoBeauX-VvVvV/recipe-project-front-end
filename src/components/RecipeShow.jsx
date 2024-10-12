@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { getRecipeById, deleteRecipe } from '../services/recipeService';
 
 const RecipeShow = () => {
@@ -29,8 +29,14 @@ const RecipeShow = () => {
     }
   };
 
+  const handleEdit = () => {
+    navigate(`/recipes/${recipeId}/edit`);
+  };
+
   if (error) return <p>{error}</p>;
   if (!recipe) return <p>Loading...</p>;
+
+  const isAuthor = recipe.author && recipe.author._id === localStorage.getItem('userId');
 
   return (
     <div>
@@ -50,7 +56,10 @@ const RecipeShow = () => {
       ) : (
         <p>No comments yet.</p>
       )}
-      <button onClick={handleDelete}>Delete Recipe</button>
+       <div>
+        <button onClick={handleEdit}>Edit Recipe</button>
+        <button onClick={handleDelete}>Delete Recipe</button>
+      </div>
     </div>
   );
 };

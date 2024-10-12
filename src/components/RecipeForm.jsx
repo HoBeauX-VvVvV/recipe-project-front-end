@@ -31,7 +31,7 @@ const RecipeForm = ({ fetchRecipes, recipe }) => {
       setIngredients('');
       setInstructions('');
     } catch (error) {
-      setError('Error saving recipe');
+      setError('Please sign in to post a recipe');
     }
   };
 

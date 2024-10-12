@@ -4,6 +4,7 @@ import RecipeList from './components/RecipeList';
 import SignupForm from './components/SignupForm';
 import SigninForm from './components/SigninForm';
 import RecipeShow from './components/RecipeShow';
+import EditRecipe from './components/EditRecipe';
 import NavBar from './components/NavBar';
 import './App.css'
 
@@ -21,6 +22,7 @@ const App = () => {
             <Route path="/signup" element={<SignupForm />} />
             <Route path="/signin" element={<SigninForm />} />
             <Route path="/recipes/:recipeId" element={<RecipeShow />} />
+            <Route path="/recipes/:recipeId/edit" element={<EditRecipe />} />
           </Routes>
         </main>
       </div>
