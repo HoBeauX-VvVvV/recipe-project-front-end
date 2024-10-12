@@ -25,16 +25,18 @@ const RecipeList = () => {
     <div>
       <h2>Recipes</h2>
       {error && <p>{error}</p>}
-      <RecipeForm fetchRecipes={fetchRecipes} />
+      
       {recipes.map(recipe => (
         <div key={recipe._id}>
           <h3>{recipe.title}</h3>
           <p><strong>Ingredients:</strong> {recipe.ingredients.join(', ')}</p>
-          <p><strong>Instructions:</strong> {recipe.instructions}</p>
           <Link to={`/recipes/${recipe._id}`}>View Recipe</Link>
           <CommentForm recipeId={recipe._id} fetchComments={fetchRecipes} />
+          <hr />
         </div>
       ))}
+      <h1>Add New Recipe</h1>
+      <RecipeForm fetchRecipes={fetchRecipes} /><hr />
     </div>
   );
 };

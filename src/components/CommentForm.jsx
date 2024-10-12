@@ -21,8 +21,8 @@ const CommentForm = ({ recipeId, fetchComments }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <textarea
+    <form className="comments" onSubmit={handleSubmit}>
+      <textarea className="comment"
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Add a comment"

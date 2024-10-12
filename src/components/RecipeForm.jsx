@@ -36,8 +36,9 @@ const RecipeForm = ({ fetchRecipes, recipe }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form  onSubmit={handleSubmit}>
       <input
+      className="newRecipe"
         type="text"
         placeholder="Title"
         value={title}
@@ -45,13 +46,15 @@ const RecipeForm = ({ fetchRecipes, recipe }) => {
         required
       />
       <input
+      className="newRecipe"
         type="text"
-        placeholder="Ingredients (comma separated)"
+        placeholder="Ingredients"
         value={ingredients}
         onChange={(e) => setIngredients(e.target.value)}
         required
       />
       <textarea
+      className="newRecipe"
         placeholder="Instructions"
         value={instructions}
         onChange={(e) => setInstructions(e.target.value)}
@@ -60,7 +63,7 @@ const RecipeForm = ({ fetchRecipes, recipe }) => {
       {error && <p>{error}</p>}
       <button type="submit">{recipe ? 'Update Recipe' : 'Add Recipe'}</button>
     </form>
-  );
+   );
 };
 
 export default RecipeForm;

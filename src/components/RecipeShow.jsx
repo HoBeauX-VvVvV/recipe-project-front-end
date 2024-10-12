@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { getRecipeById } from '../services/recipeService';
+import { useParams, useNavigate } from 'react-router-dom';
+import { getRecipeById, deleteRecipe } from '../services/recipeService';
 
 const RecipeShow = () => {
   const { recipeId } = useParams();
   const [recipe, setRecipe] = useState(null);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -19,6 +20,15 @@ const RecipeShow = () => {
     fetchRecipe();
   }, [recipeId]);
 
+  const handleDelete = async () => {
+    try {
+      await deleteRecipe(recipeId); 
+      navigate('/recipes'); 
+    } catch (error) {
+      setError('Failed to delete recipe');
+    }
+  };
+
   if (error) return <p>{error}</p>;
   if (!recipe) return <p>Loading...</p>;
 
@@ -28,18 +38,19 @@ const RecipeShow = () => {
       <p><strong>Author:</strong> {recipe.author?.username}</p>
       <p><strong>Ingredients:</strong> {recipe.ingredients.join(', ')}</p>
       <p><strong>Instructions:</strong> {recipe.instructions}</p>
-      
+      <hr/>
       <h3>Comments</h3>
       {recipe.comments.length > 0 ? (
         recipe.comments.map((comment, index) => (
           <div key={index}>
             <p>{comment.text}</p>
-            <p><strong>Comment by:</strong> {comment.author?.username}</p>
+            <p>Comment by:<strong> {comment.author?.username}</strong></p>
           </div>
         ))
       ) : (
         <p>No comments yet.</p>
       )}
+      <button onClick={handleDelete}>Delete Recipe</button>
     </div>
   );
 };
