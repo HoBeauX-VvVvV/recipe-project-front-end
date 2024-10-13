@@ -20,7 +20,7 @@ const EditRecipe = () => {
         setRecipe(data);
         setFormData({
           title: data.title,
-          ingredients: data.ingredients.join(', '), // Convert array to comma-separated string
+          ingredients: data.ingredients.join(', '),
           instructions: data.instructions
         });
       } catch (error) {
@@ -43,7 +43,7 @@ const EditRecipe = () => {
     try {
       const updatedRecipe = {
         title: formData.title,
-        ingredients: formData.ingredients.split(',').map(ingredient => ingredient.trim()), // Convert to array
+        ingredients: formData.ingredients.split(',').map(ingredient => ingredient.trim()),
         instructions: formData.instructions,
       };
       await updateRecipe(recipeId, updatedRecipe);
