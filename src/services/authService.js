@@ -14,4 +14,5 @@ export const signin = async (username, password) => {
 
 export const logout = () => {
   localStorage.removeItem('token');
+  localStorage.removeItem('userId');
 };

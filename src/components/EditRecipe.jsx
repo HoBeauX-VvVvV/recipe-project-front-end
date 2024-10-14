@@ -57,7 +57,7 @@ const EditRecipe = () => {
   if (!recipe) return <p>Loading...</p>;
 
   return (
-    <div>
+    <div claasName="editRecipeForm">
       <h2>Edit Recipe</h2>
       <form onSubmit={handleSubmit}>
         <label>
