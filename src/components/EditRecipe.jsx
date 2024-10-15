@@ -57,39 +57,42 @@ const EditRecipe = () => {
   if (!recipe) return <p>Loading...</p>;
 
   return (
-    <div>
-      <h2>Edit Recipe</h2>
+    <div className="container mt-5" style={{ maxWidth: '500px' }}>
+      <h2 className="mb-4">Edit Recipe</h2>
       <form onSubmit={handleSubmit}>
-        <label>
-          Title:
+        <div className="mb-3">
+          <label>Title</label>
           <input
             type="text"
             name="title"
+            className="form-control"
             value={formData.title}
             onChange={handleChange}
             required
           />
-        </label>
-        <label>
-          Ingredients (comma-separated):
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Ingredients (comma-separated)</label>
           <input
             type="text"
             name="ingredients"
+            className="form-control"
             value={formData.ingredients}
             onChange={handleChange}
             required
           />
-        </label>
-        <label>
-          Instructions:
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Instructions</label>
           <textarea
             name="instructions"
+            className="form-control"
             value={formData.instructions}
             onChange={handleChange}
             required
           />
-        </label>
-        <button type="submit">Save Changes</button>
+        </div>
+        <button type="submit" className="btn btn-primary w-50">Save Changes</button>
       </form>
     </div>
   );
