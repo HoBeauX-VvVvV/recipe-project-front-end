@@ -21,15 +21,16 @@ const CommentForm = ({ recipeId, fetchComments }) => {
   };
 
   return (
-    <form className="comments" onSubmit={handleSubmit}>
-      <textarea className="comment"
+    <form className="mb-3" onSubmit={handleSubmit}>
+      <textarea
+        className="form-control mb-2"
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Add a comment"
         required
       />
       {error && <p>{error}</p>}
-      <button type="submit">Post Comment</button>
+      <button type="submit" className="btn btn-primary btn-sm">Post Comment</button>
     </form>
   );
 };
