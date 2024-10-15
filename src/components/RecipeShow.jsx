@@ -77,54 +77,62 @@ const RecipeShow = () => {
 
 
   return (
-    <div>
-      <h2>{recipe.title}</h2>
-      <p><strong>Author:</strong> {recipe.author?.username}</p>
-      <p><strong>Ingredients:</strong> {recipe.ingredients.join(', ')}</p>
-      <p><strong>Instructions:</strong> {recipe.instructions}</p>
-      {isAuthor && (
-        <div>
-          <button onClick={handleEditRecipe}>Edit Recipe</button>
-          <button onClick={handleDeleteRecipe}>Delete Recipe</button>
+    <div className="container mt-4">
+      <div className="card mb-4 shadow-sm">
+        <div className="card-body">
+          <h2 className="card-title">{recipe.title}</h2>
+          <p className="text-muted"><strong>Author:</strong> {recipe.author?.username}</p>
+          <p><strong>Ingredients:</strong> {recipe.ingredients.join(', ')}</p>
+          <p><strong>Instructions:</strong> {recipe.instructions}</p>
+          {isAuthor && (
+            <div className="mt-3">
+              <button onClick={handleEditRecipe} className="btn btn-primary me-2">Edit Recipe</button>
+              <button onClick={handleDeleteRecipe} className="btn btn-primary">Delete Recipe</button>
+            </div>
+          )}
         </div>
-      )}
-      <hr/>
+      </div>
+
       <h3>Comments</h3>
-      {recipe.comments.length > 0 ? (
-        recipe.comments.map((comment) => {
-          const isCommentAuthor = comment.author && comment.author._id === userId;
-          return (
-            <div key={comment._id}>
-              <p>{comment.text}</p>
-              <p>Comment by: <strong>{comment.author?.username}</strong></p>
-              {isCommentAuthor && (
-                <div>
-                  {editingCommentId === comment._id ? (
-                    <div>
-                      <textarea
-                        value={commentText}
-                        onChange={(e) => setCommentText(e.target.value)}
-                      />
-                      <button onClick={() => handleEditComment(comment._id)}>Save</button>
-                      <button onClick={() => setEditingCommentId(null)}>Cancel</button>
-                    </div>
-                  ) : (
-                    <div>
-                      <button onClick={() => startEditingComment(comment._id, comment.text)}>Edit Comment</button>
-                      <button onClick={() => handleDeleteComment(comment._id)}>Delete Comment</button>
+      <div className="d-flex flex-column gap-3">
+        {recipe.comments.length > 0 ? (
+          recipe.comments.map((comment) => {
+            const isCommentAuthor = comment.author && comment.author._id === userId;
+            return (
+              <div key={comment._id} className="card shadow-sm">
+                <div className="card-body">
+                  <p className="card-text">{comment.text}</p>
+                  <p className="text-muted"><small>By {comment.author?.username}</small></p>
+                  {isCommentAuthor && (
+                    <div className="mt-2">
+                      {editingCommentId === comment._id ? (
+                        <div>
+                          <textarea
+                            className="form-control mb-2"
+                            value={commentText}
+                            onChange={(e) => setCommentText(e.target.value)}
+                          />
+                          <button onClick={() => handleEditComment(comment._id)} className="btn btn-primary btn-sm me-2">Save</button>
+                          <button onClick={() => setEditingCommentId(null)} className="btn btn-secondary btn-sm">Cancel</button>
+                        </div>
+                      ) : (
+                        <div>
+                          <button onClick={() => startEditingComment(comment._id, comment.text)} className="btn btn-primary btn-sm me-2">Edit Comment</button>
+                          <button onClick={() => handleDeleteComment(comment._id)} className="btn btn-primary btn-sm">Delete Comment</button>
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
-              )}
-            </div>
-          );
-        })
-      ) : (
-        <p>No comments yet.</p>
-      )}
+              </div>
+            );
+          })
+        ) : (
+          <p>No comments yet.</p>
+        )}
+      </div>
     </div>
   );
 };
-
 
 export default RecipeShow;
