@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import RecipeList from './components/RecipeList';
 import SignupForm from './components/SignupForm';
 import SigninForm from './components/SigninForm';
