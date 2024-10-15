@@ -36,34 +36,45 @@ const RecipeForm = ({ fetchRecipes, recipe }) => {
   };
 
   return (
-    <form  onSubmit={handleSubmit}>
-      <input
-      className="newRecipe"
-        type="text"
-        placeholder="Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        required
-      />
-      <input
-      className="newRecipe"
-        type="text"
-        placeholder="Ingredients"
-        value={ingredients}
-        onChange={(e) => setIngredients(e.target.value)}
-        required
-      />
-      <textarea
-      className="newRecipe"
-        placeholder="Instructions"
-        value={instructions}
-        onChange={(e) => setInstructions(e.target.value)}
-        required
-      />
-      {error && <p>{error}</p>}
-      <button type="submit">{recipe ? 'Update Recipe' : 'Add Recipe'}</button>
+    <form onSubmit={handleSubmit} className="mb-4">
+      <div className="mb-3">
+        <label className="form-label">Title</label>
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Recipe Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
+      </div>
+      <div className="mb-3">
+        <label className="form-label">Ingredients</label>
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Ingredients"
+          value={ingredients}
+          onChange={(e) => setIngredients(e.target.value)}
+          required
+        />
+      </div>
+      <div className="mb-3">
+        <label className="form-label">Instructions</label>
+        <textarea
+          className="form-control"
+          placeholder="Instructions"
+          value={instructions}
+          onChange={(e) => setInstructions(e.target.value)}
+          required
+        />
+      </div>
+      {error && <p className="text-danger">{error}</p>}
+      <button type="submit" className="btn btn-primary">
+        {recipe ? 'Update Recipe' : 'Add Recipe'}
+      </button>
     </form>
-   );
+  );
 };
 
 export default RecipeForm;
